@@ -24,13 +24,14 @@ function getVal(source, prop) {
   return source[prop].value;
 }
 
-// const getInputVal = (prop) => getVal(inputs, prop);
 const getInputVal = (prop) =>
+  // Custom case for the checkbox input:
   prop === 'text-transform'
     ? inputs[prop].checked
       ? 'uppercase'
       : 'none'
-    : getVal(inputs, prop);
+    : // Standart approach
+      getVal(inputs, prop);
 
 function setStyle(style, prop) {
   style[prop] = getInputVal(prop);
