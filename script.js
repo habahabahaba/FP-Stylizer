@@ -21,14 +21,16 @@ const inputs = {
 const outputStyle = outputField.style;
 
 function getVal(source, prop) {
-  return prop === 'text-transform'
-    ? source[prop].checked
-      ? 'uppercase'
-      : 'none'
-    : source[prop].value;
+  return source[prop].value;
 }
 
-const getInputVal = (prop) => getVal(inputs, prop);
+// const getInputVal = (prop) => getVal(inputs, prop);
+const getInputVal = (prop) =>
+  prop === 'text-transform'
+    ? inputs[prop].checked
+      ? 'uppercase'
+      : 'none'
+    : getVal(inputs, prop);
 
 function setStyle(style, prop) {
   style[prop] = getInputVal(prop);
@@ -52,7 +54,7 @@ const setters = {
 const setOutputStyle = compose(...Object.values(setters));
 
 applyBtn.addEventListener('click', () => {
-  outputField.insertAdjacentText('afterbegin', getInputVal('content'));
+  outputField.innerText = getInputVal('content');
   setOutputStyle(outputStyle);
   // console.log('el:', outputField);
   // console.log('el.style:', outputField.style);
